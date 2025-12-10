@@ -13,6 +13,9 @@ RUN go mod download
 # Copy the source code
 COPY . .
 
+ENV PORT=8080
+ENV REQUEST_ORIGIN=http://localhost:3000
+
 # Expose the application port
 EXPOSE 8080
 

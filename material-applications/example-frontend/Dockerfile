@@ -14,9 +14,16 @@ RUN npm install
 # Copy the rest of the project into the WORKDIR
 COPY . .
 
-# Expose the port that the app listens on
+# Add ENV to the frontend
+ENV REACT_APP_BACKEND_URL=http://localhost:8080
+
+RUN npm run build
+
+RUN npm install -g serve
+
+# Expose the port that the frontend listens on
 EXPOSE 3000
 
 # Command to start the app
-CMD ["npm", "start"]
+CMD ["serve", "-s", "build", "-l", "3000"]
 
