@@ -7,6 +7,8 @@ WORKDIR /usr/share/nginx/html
 COPY README.md .
 
 RUN markdown_py README.md > index.html
+ 
+COPY nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
 
