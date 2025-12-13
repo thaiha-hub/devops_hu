@@ -1,9 +1,9 @@
-# As required, the image is based on node 16.x 
+# Beginning with the existing image node.js ver.16 
 FROM node:16
-# Set working directory
+# creating a folder /app and starting working in the folder
 WORKDIR /app
 
-RUN node -v & npm -v
+RUN node -v && npm -v
 
 # Copy package.json and package-lock.json, these files that tell Node what dependencies to install by using command >> npm install<<
 COPY package*.json ./
@@ -11,10 +11,10 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
-# Copy the rest of the project into the WORKDIR
+# Copy everything in the local  project folder into the container (/app)
 COPY . .
 
-# Add ENV to the frontend
+# set the environment variable
 ENV REACT_APP_BACKEND_URL=http://localhost:8080
 
 RUN npm run build
