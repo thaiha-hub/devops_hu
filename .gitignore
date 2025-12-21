@@ -1,0 +1,15 @@
+# OS / installers
+*.pkg
+
+# log files
+*.log
+
+# Editor / OS noise
+.DS_Store
+.vscode/
+.idea/
+
+# Temporary files
+tmp/
+*.tmp
+
