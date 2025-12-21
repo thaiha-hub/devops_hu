@@ -1,0 +1,33 @@
+name: Build and push Docker image (on CV changes)
+
+on:
+  push:
+    paths:
+      - "markdown-cv/my_cv.md"
+      - "markdown-cv/Dockerfile"
+      - "markdown-cv/nginx.conf"
+      - "markdown-cv/**"
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: ./markdown-cv
+          file: ./markdown-cv/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/markdown-cv:latest
+
