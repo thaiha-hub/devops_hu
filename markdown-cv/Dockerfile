@@ -3,7 +3,7 @@ FROM nginx:alpine
 
 RUN apk add --no-cache python3 py3-markdown
 
-COPY README.md /usr/share/nginx/html/README.md
+COPY my_cv.md /usr/share/nginx/html/my_cv.md
 
-CMD sh -c "markdown_py /usr/share/nginx/html/README.md > /usr/share/nginx/html/index.html && nginx -g 'daemon off;'"
+CMD sh -c "markdown_py /usr/share/nginx/html/my_cv.md > /usr/share/nginx/html/index.html && nginx -g 'daemon off;'"
 
